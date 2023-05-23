@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.hibernate.model.Alimento;
 import com.hibernate.util.HibernateUtil;
@@ -73,6 +74,22 @@ public class AlimentoDAO {
 			return a;
 		}
 		
+		public Alimento selectAlimentoByNombre(String al) {
+			Transaction transaction = null;
+			Alimento a = null;
+			try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+				transaction = session.beginTransaction();
+				Query<Alimento> query = session.createQuery("FROM Alimento WHERE nombre = :nomParam",Alimento.class);
+				query.setParameter("nomParam", al);
+				a=query.uniqueResult();
+				transaction.commit();
+			} catch (Exception e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
+			}
+			return a;
+		}
 		
 		// Selección múltiple
 		public List<Alimento> selectAllAlimento() {
