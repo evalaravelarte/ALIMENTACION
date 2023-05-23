@@ -55,7 +55,6 @@ public class App {
 	private	double sal=0;
 	private	double calorias=0;
 	private JTable tableTotalComido;
-	private JTextField textFieldGrasaTotal;
 	private JTextField textFieldGrasasTotales;
 	private JTextField textFieldGrasasSatTotal;
 	private JTextField textFieldAzucarTotal;
@@ -122,14 +121,14 @@ public class App {
 		modelAlimentos.addColumn("Calorías");
 		
 		// Creación la tabla alimentos comidos
-		DefaultTableModel modelAlimentosComidos= new DefaultTableModel();
-		modelAlimentosComidos.addColumn("Grasas");
-		modelAlimentosComidos.addColumn("Grasas Saturadas");
-		modelAlimentosComidos.addColumn("Hidratos");
-		modelAlimentosComidos.addColumn("Azúcares");
-		modelAlimentosComidos.addColumn("Proteína");
-		modelAlimentosComidos.addColumn("Sal");
-		modelAlimentosComidos.addColumn("Calorías");
+//		DefaultTableModel modelAlimentosComidos= new DefaultTableModel();
+//		modelAlimentosComidos.addColumn("Grasas");
+//		modelAlimentosComidos.addColumn("Grasas Saturadas");
+//		modelAlimentosComidos.addColumn("Hidratos");
+//		modelAlimentosComidos.addColumn("Azúcares");
+//		modelAlimentosComidos.addColumn("Proteína");
+//		modelAlimentosComidos.addColumn("Sal");
+//		modelAlimentosComidos.addColumn("Calorías");
 		
 		DefaultTableCellRenderer centrador = new DefaultTableCellRenderer();
 		centrador.setHorizontalAlignment(SwingConstants.CENTER);
@@ -147,18 +146,18 @@ public class App {
 		scrollPaneAlimentos.setBounds(54, 33, 1106, 231);
 		frmAlimentacion.getContentPane().add(scrollPaneAlimentos);
 		
-		tableTotalComido = new JTable(modelAlimentosComidos);
-		tableTotalComido.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		tableTotalComido.setBounds(755, 647, 363, -114);
-		frmAlimentacion.getContentPane().add(tableTotalComido);
-		tableTotalComido.setDefaultEditor(Object.class, null);
-		for (int i = 0; i < tableTotalComido.getColumnCount(); i++) {
-			tableTotalComido.getColumnModel().getColumn(i).setCellRenderer(centrador);
-		}
-		
-		JScrollPane scrollPaneAlimentosComidos = new JScrollPane(tableTotalComido);
-		scrollPaneAlimentosComidos.setBounds(54, 641, 431, 67);
-		frmAlimentacion.getContentPane().add(scrollPaneAlimentosComidos);
+//		tableTotalComido = new JTable(modelAlimentosComidos);
+//		tableTotalComido.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//		tableTotalComido.setBounds(755, 647, 363, -114);
+//		frmAlimentacion.getContentPane().add(tableTotalComido);
+//		tableTotalComido.setDefaultEditor(Object.class, null);
+//		for (int i = 0; i < tableTotalComido.getColumnCount(); i++) {
+//			tableTotalComido.getColumnModel().getColumn(i).setCellRenderer(centrador);
+//		}
+//		
+//		JScrollPane scrollPaneAlimentosComidos = new JScrollPane(tableTotalComido);
+//		scrollPaneAlimentosComidos.setBounds(54, 641, 431, 67);
+//		frmAlimentacion.getContentPane().add(scrollPaneAlimentosComidos);
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.setForeground(Color.WHITE);
@@ -329,11 +328,6 @@ public class App {
 		JButton btnMostrarTotal = new JButton("Mostrar total");
 		btnMostrarTotal.setBounds(1044, 427, 85, 21);
 		frmAlimentacion.getContentPane().add(btnMostrarTotal);
-		
-		textFieldGrasaTotal = new JTextField();
-		textFieldGrasaTotal.setBounds(513, 668, 60, 19);
-		frmAlimentacion.getContentPane().add(textFieldGrasaTotal);
-		textFieldGrasaTotal.setColumns(10);
 		
 		JLabel lblGrasas_1 = new JLabel("Grasas:");
 		lblGrasas_1.setForeground(new Color(32, 178, 170));
