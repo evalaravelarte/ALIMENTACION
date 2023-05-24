@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,7 +46,28 @@ public class App {
 	private JTextField textFieldSal;
 	private JTextField textFieldCalorias;
 	private JTextField textFieldCantidad;
+	
+	String erNombre = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
 
+	/**
+	 * Comprueba si una palabra coincide con una expresión regular dada.
+	 *
+	 * @param palabra La palabra a verificar.
+	 * @param er      La expresión regular a utilizar para la verificación.
+	 * @return true si la palabra coincide con la expresión regular, false de lo
+	 *         contrario.
+	 */
+	boolean comprobarExpReg(String palabra, String er) {
+		Pattern pat = Pattern.compile(er);
+		Matcher mat = pat.matcher(palabra);
+		if (mat.matches()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
 	// Variables para sumar las variables de los alimentos
 	private double grasas = 0;
 	private double grasasSat = 0;
@@ -539,6 +562,12 @@ public class App {
 
 				int index = tableAlimentos.getSelectedRow();
 				TableModel modelAlimentos = tableAlimentos.getModel();
+				List<Alimento> alimentos = alimentoDAO.selectAllAlimento();
+				for (Alimento a : alimentos) {
+					String nombre = a.getNombre();
+					comboBoxAlimentos.addItem(nombre);
+
+				}
 				textFieldIdAlimento.setText(modelAlimentos.getValueAt(index, 0).toString());
 				textFieldNombre.setText(modelAlimentos.getValueAt(index, 1).toString());
 				textFieldGrasas.setText(modelAlimentos.getValueAt(index, 2).toString());
@@ -550,6 +579,9 @@ public class App {
 				textFieldCalorias.setText(modelAlimentos.getValueAt(index, 8).toString());
 				comboBoxAlimentos.setSelectedItem(
 						modelAlimentos.getValueAt(index, 1).toString());
+				
+				String combo = modelAlimentos.getValueAt(index, 1).toString();
+				comboBoxAlimentos.setSelectedItem(combo);
 			}
 		});
 
@@ -557,30 +589,72 @@ public class App {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					String nombre = textFieldNombre.getText();
-					double grasas = Double.parseDouble(textFieldGrasas.getText());
-					double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
-					double hidratos = Double.parseDouble(textFieldHidratos.getText());
-					double azucar = Double.parseDouble(textFieldAzucar.getText());
-					double proteinas = Double.parseDouble(textFieldProteinas.getText());
-					double sal = Double.parseDouble(textFieldSal.getText());
-					double calorias = Double.parseDouble(textFieldCalorias.getText());
+					String mensaje = "";
+					boolean correcto = true;
+					
+					
+					if(!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
+						mensaje += "Nombre no válido\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
+						mensaje += "Grasas no válidas\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
+						mensaje += "Grasas saturadas no válidas\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
+						mensaje += "Hidratos no válidos\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
+						mensaje += "Azucar no válido\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
+						mensaje += "Proteinas no válidas\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldSal.getText(), erNombre)) {
+						mensaje += "Sal no válida\n";
+						correcto = false;
+					}
+					if(comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
+						mensaje += "Calorías no válidas\n";
+						correcto = false;
+					}
+					
+					if(correcto) {
+						String nombre = textFieldNombre.getText();
+						double grasas = Double.parseDouble(textFieldGrasas.getText());
+						double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
+						double hidratos = Double.parseDouble(textFieldHidratos.getText());
+						double azucar = Double.parseDouble(textFieldAzucar.getText());
+						double proteinas = Double.parseDouble(textFieldProteinas.getText());
+						double sal = Double.parseDouble(textFieldSal.getText());
+						double calorias = Double.parseDouble(textFieldCalorias.getText());
 
-					Alimento a = new Alimento(nombre, grasas, grasasSat, hidratos, azucar,
-							proteinas, sal, calorias);
-					alimentoDAO.insertAlimento(a);
+						Alimento a = new Alimento(nombre, grasas, grasasSat, hidratos, azucar,
+								proteinas, sal, calorias);
+						alimentoDAO.insertAlimento(a);
 
-					textFieldIdAlimento.setText("");
-					textFieldNombre.setText("");
-					textFieldGrasas.setText("");
-					textFieldGrasasSat.setText("");
-					textFieldHidratos.setText("");
-					textFieldAzucar.setText("");
-					textFieldProteinas.setText("");
-					textFieldSal.setText("");
-					textFieldCalorias.setText("");
+						textFieldIdAlimento.setText("");
+						textFieldNombre.setText("");
+						textFieldGrasas.setText("");
+						textFieldGrasasSat.setText("");
+						textFieldHidratos.setText("");
+						textFieldAzucar.setText("");
+						textFieldProteinas.setText("");
+						textFieldSal.setText("");
+						textFieldCalorias.setText("");
+						mensaje = "Alimento creado";
+						btnMostrar.doClick();
+					}
+					JOptionPane.showMessageDialog(null, mensaje);
 
-					btnMostrar.doClick();
+					
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
 				}
@@ -590,46 +664,89 @@ public class App {
 
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+				String mensaje = "";
+				boolean correcto = true;
+				
+				
+				if(!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
+					mensaje += "Nombre no válido\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
+					mensaje += "Grasas no válidas\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
+					mensaje += "Grasas saturadas no válidas\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
+					mensaje += "Hidratos no válidos\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
+					mensaje += "Azucar no válido\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
+					mensaje += "Proteinas no válidas\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldSal.getText(), erNombre)) {
+					mensaje += "Sal no válida\n";
+					correcto = false;
+				}
+				if(comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
+					mensaje += "Calorías no válidas\n";
+					correcto = false;
+				}
+				
+				if(correcto) {
+					int id = Integer.parseInt(textFieldIdAlimento.getText());
+					String nombre = textFieldNombre.getText();
+					double grasas = Double.parseDouble(textFieldGrasas.getText());
+					double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
+					double hidratos = Double.parseDouble(textFieldHidratos.getText());
+					double azucar = Double.parseDouble(textFieldAzucar.getText());
+					double proteinas = Double.parseDouble(textFieldProteinas.getText());
+					double sal = Double.parseDouble(textFieldSal.getText());
+					double calorias = Double.parseDouble(textFieldCalorias.getText());
 
-				int id = Integer.parseInt(textFieldIdAlimento.getText());
-				String nombre = textFieldNombre.getText();
-				double grasas = Double.parseDouble(textFieldGrasas.getText());
-				double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
-				double hidratos = Double.parseDouble(textFieldHidratos.getText());
-				double azucar = Double.parseDouble(textFieldAzucar.getText());
-				double proteinas = Double.parseDouble(textFieldProteinas.getText());
-				double sal = Double.parseDouble(textFieldSal.getText());
-				double calorias = Double.parseDouble(textFieldCalorias.getText());
+					Alimento a = alimentoDAO.selectAlimentoById(id);
+					a.setNombre(nombre);
+					a.setGrasas(grasas);
+					a.setGrasasSaturadas(grasasSat);
+					a.setHidratos(hidratos);
+					a.setAzucar(azucar);
+					a.setProteinas(proteinas);
+					a.setSal(sal);
+					a.setCalorias(calorias);
 
-				Alimento a = alimentoDAO.selectAlimentoById(id);
-				a.setNombre(nombre);
-				a.setGrasas(grasas);
-				a.setGrasasSaturadas(grasasSat);
-				a.setHidratos(hidratos);
-				a.setAzucar(azucar);
-				a.setProteinas(proteinas);
-				a.setSal(sal);
-				a.setCalorias(calorias);
-
-				alimentoDAO.updateAlimento(a);
-				textFieldIdAlimento.setText("");
-				textFieldNombre.setText("");
-				textFieldGrasas.setText("");
-				textFieldGrasasSat.setText("");
-				textFieldHidratos.setText("");
-				textFieldAzucar.setText("");
-				textFieldProteinas.setText("");
-				textFieldSal.setText("");
-				textFieldCalorias.setText("");
-
-				btnMostrar.doClick();
-
+					alimentoDAO.updateAlimento(a);
+					textFieldIdAlimento.setText("");
+					textFieldNombre.setText("");
+					textFieldGrasas.setText("");
+					textFieldGrasasSat.setText("");
+					textFieldHidratos.setText("");
+					textFieldAzucar.setText("");
+					textFieldProteinas.setText("");
+					textFieldSal.setText("");
+					textFieldCalorias.setText("");
+					mensaje = "Alimento actualizado";
+					btnMostrar.doClick();
+				}
+				JOptionPane.showMessageDialog(null, mensaje);
+				
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
+			}
 			}
 		});
 
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				try {
 				int id = Integer.parseInt(textFieldIdAlimento.getText());
 				alimentoDAO.deleteAlimento(id);
 				textFieldIdAlimento.setText("");
@@ -642,6 +759,9 @@ public class App {
 				textFieldSal.setText("");
 				textFieldCalorias.setText("");
 				btnMostrar.doClick();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Debes escoger un alimento");
+				}
 			}
 		});
 
