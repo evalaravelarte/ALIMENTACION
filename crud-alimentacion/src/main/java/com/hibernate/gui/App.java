@@ -667,13 +667,7 @@ public class App {
 								alimentosComidos.put(alimento, cantidad);
 							}
 							
-							modelAlimentosComidos.setRowCount(0);
-							for (String al : alimentosComidos.keySet()) {
-								Object[] row = new Object[2];
-								row[0] = a;
-								row[1] = alimentosComidos.get(a);
-								modelAlimentosComidos.addRow(row);
-							}
+						
 					
 
 						comboBoxAlimentos.setSelectedIndex(-1);
