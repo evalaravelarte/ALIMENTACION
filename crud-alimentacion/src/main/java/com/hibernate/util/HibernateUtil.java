@@ -10,11 +10,17 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.hibernate.model.Alimento;
 
-
-
-
+/**
+ * HibernateUtil es una clase de utilidad que proporciona una única instancia
+ * de la factoría de sesiones de Hibernate.
+ */
 public class HibernateUtil {
 	private static SessionFactory sessionFactory;
+	/**
+     * Obtiene la instancia de la factoría de sesiones de Hibernate.
+     *
+     * @return la instancia de SessionFactory
+     */
 	public static SessionFactory getSessionFactory() {
 		if(sessionFactory == null) {
 			try {
