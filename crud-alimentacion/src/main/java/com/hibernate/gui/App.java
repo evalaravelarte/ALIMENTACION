@@ -514,6 +514,7 @@ public class App {
 		frmAlimentacion.getContentPane().add(lblTotalCalorias);
 		
 		textFieldCalTotal = new JTextField();
+		textFieldCalTotal.setEditable(false);
 		textFieldCalTotal.setBounds(621, 714, 85, 19);
 		frmAlimentacion.getContentPane().add(textFieldCalTotal);
 		textFieldCalTotal.setColumns(10);
