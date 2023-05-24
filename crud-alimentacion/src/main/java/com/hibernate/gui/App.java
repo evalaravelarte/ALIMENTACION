@@ -53,6 +53,8 @@ public class App {
 	private double proteinas = 0;
 	private double sal = 0;
 	private double calorias = 0;
+	
+	
 	private JTable tableTotalComido;
 	private JTextField textFieldGrasasTotales;
 	private JTextField textFieldGrasasSatTotal;
@@ -62,6 +64,8 @@ public class App {
 	private JTextField textFieldSalTotal;
 	private JTextField textFieldCaloriastotal;
 	private JTextField textFieldPeso;
+	private JTextField textFieldCalTotal;
+	
 	static final int MAX_SAL=5;
 	static final int MAX_AZUCAR=22;
 	static final int MAX_KCAL=200;
@@ -70,14 +74,26 @@ public class App {
 	static final double EJER_MODERADO=1.6;
 	static final double EJER_FUERTE=1.8;
 	static final double EJER_MUY_FUERTE=2;
-	private JTextField textFieldCalTotal;
 	
+	/**
+	 * Función calcularCantidad para que partiendo de los datos de un alimento cada 100g, 
+	 * obtenganmos los valores correspondientes a la cantidad.
+	 * @param variable: dato de un alimento
+	 * @param cantidad: cantidad de alimento que se ha comido
+	 * @return devuelve el valor correspondiente del dato del alimento en función de la cantidad
+	 */
 	static double calcularCantidad(double variable, double cantidad) {
 
 		return (cantidad * variable) / 100;
 
 	}
 
+	/**
+	 * Función para calcular las calorias que debe ingerir una persona al día
+	 * @param peso: peso de la persona
+	 * @param factAct: factor de actividad, cantidad de ejercicio que realiza
+	 * @return devulve las calorías que debe comer
+	 */
 	static double calcularCalorias(double peso, double factAct) {
 		
 		return peso * 22 * factAct;
@@ -140,6 +156,8 @@ public class App {
 		centrador.setHorizontalAlignment(SwingConstants.CENTER);
 
 		tableAlimentos = new JTable(modelAlimentos);
+		tableAlimentos.setSelectionBackground(new Color(244, 164, 96));
+		tableAlimentos.setBackground(new Color(255, 228, 196));
 		tableAlimentos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tableAlimentos.setBounds(113, 270, 432, 175);
 		frmAlimentacion.getContentPane().add(tableAlimentos);
@@ -149,7 +167,7 @@ public class App {
 		}
 
 		JScrollPane scrollPaneAlimentos = new JScrollPane(tableAlimentos);
-		scrollPaneAlimentos.setBounds(54, 33, 1106, 231);
+		scrollPaneAlimentos.setBounds(100, 40, 1106, 231);
 		frmAlimentacion.getContentPane().add(scrollPaneAlimentos);
 
 		tableTotalComido = new JTable(modelAlimentosComidos);
@@ -162,62 +180,77 @@ public class App {
 		}
 
 		JScrollPane scrollPaneAlimentosComidos = new JScrollPane(tableTotalComido);
-		scrollPaneAlimentosComidos.setBounds(747, 487, 221, 98);
+		scrollPaneAlimentosComidos.setBounds(653, 483, 221, 98);
 		frmAlimentacion.getContentPane().add(scrollPaneAlimentosComidos);
+		
+		
+		// Cambiar color del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new Color(255,165,0));
+        headerRenderer.setForeground(Color.WHITE);
+        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < tableAlimentos.getColumnModel().getColumnCount(); i++) {
+        	tableAlimentos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        for (int i = 0; i < tableTotalComido.getColumnModel().getColumnCount(); i++) {
+        	tableTotalComido.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
 
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.setForeground(Color.WHITE);
 		btnCrear.setFont(new Font("Dialog", Font.BOLD, 11));
-		btnCrear.setBackground(new Color(32, 178, 170));
-		btnCrear.setBounds(550, 319, 106, 21);
+		btnCrear.setBackground(new Color(255, 165, 0));
+		btnCrear.setBounds(447, 319, 106, 21);
 		frmAlimentacion.getContentPane().add(btnCrear);
 
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.setForeground(Color.WHITE);
 		btnActualizar.setFont(new Font("Dialog", Font.BOLD, 11));
-		btnActualizar.setBackground(new Color(32, 178, 170));
-		btnActualizar.setBounds(550, 388, 106, 21);
+		btnActualizar.setBackground(new Color(255, 165, 0));
+		btnActualizar.setBounds(447, 388, 106, 21);
 		frmAlimentacion.getContentPane().add(btnActualizar);
 
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.setForeground(Color.WHITE);
 		btnBorrar.setFont(new Font("Dialog", Font.BOLD, 11));
-		btnBorrar.setBackground(new Color(32, 178, 170));
-		btnBorrar.setBounds(550, 463, 106, 21);
+		btnBorrar.setBackground(new Color(255, 165, 0));
+		btnBorrar.setBounds(447, 463, 106, 21);
 		frmAlimentacion.getContentPane().add(btnBorrar);
 
 		JLabel lblIdAlimento = new JLabel("Id:");
-		lblIdAlimento.setForeground(new Color(32, 178, 170));
+		lblIdAlimento.setForeground(new Color(255, 165, 0));
 		lblIdAlimento.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblIdAlimento.setBounds(100, 302, 73, 13);
 		frmAlimentacion.getContentPane().add(lblIdAlimento);
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setForeground(new Color(32, 178, 170));
+		lblNombre.setForeground(new Color(255, 165, 0));
 		lblNombre.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNombre.setBounds(100, 348, 60, 13);
 		frmAlimentacion.getContentPane().add(lblNombre);
 
 		JLabel lblGrasas = new JLabel("Grasas:");
-		lblGrasas.setForeground(new Color(32, 178, 170));
+		lblGrasas.setForeground(new Color(255, 165, 0));
 		lblGrasas.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblGrasas.setBounds(100, 391, 99, 13);
 		frmAlimentacion.getContentPane().add(lblGrasas);
 
 		JLabel lblGrasasSaturadas = new JLabel("Grasas Saturadas:");
-		lblGrasasSaturadas.setForeground(new Color(32, 178, 170));
+		lblGrasasSaturadas.setForeground(new Color(255, 165, 0));
 		lblGrasasSaturadas.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblGrasasSaturadas.setBounds(100, 430, 141, 13);
 		frmAlimentacion.getContentPane().add(lblGrasasSaturadas);
 
 		JLabel lblHidratos = new JLabel("Hidratos:");
-		lblHidratos.setForeground(new Color(32, 178, 170));
+		lblHidratos.setForeground(new Color(255, 165, 0));
 		lblHidratos.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblHidratos.setBounds(100, 466, 73, 13);
 		frmAlimentacion.getContentPane().add(lblHidratos);
 
 		JLabel lblAzucares = new JLabel("Azúcares:");
-		lblAzucares.setForeground(new Color(32, 178, 170));
+		lblAzucares.setForeground(new Color(255, 165, 0));
 		lblAzucares.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblAzucares.setBounds(100, 502, 99, 13);
 		frmAlimentacion.getContentPane().add(lblAzucares);
@@ -256,13 +289,13 @@ public class App {
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setForeground(Color.WHITE);
 		btnLimpiar.setFont(new Font("Dialog", Font.BOLD, 11));
-		btnLimpiar.setBackground(new Color(32, 178, 170));
-		btnLimpiar.setBounds(550, 532, 106, 21);
+		btnLimpiar.setBackground(new Color(255, 165, 0));
+		btnLimpiar.setBounds(447, 532, 106, 21);
 		frmAlimentacion.getContentPane().add(btnLimpiar);
 
 		JLabel lblProtenias = new JLabel("Proteínas:");
 		lblProtenias.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblProtenias.setForeground(new Color(32, 178, 170));
+		lblProtenias.setForeground(new Color(255, 165, 0));
 		lblProtenias.setBounds(100, 538, 85, 15);
 		frmAlimentacion.getContentPane().add(lblProtenias);
 
@@ -273,7 +306,7 @@ public class App {
 
 		JLabel lblSal = new JLabel("Sal:");
 		lblSal.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSal.setForeground(new Color(32, 178, 170));
+		lblSal.setForeground(new Color(255, 165, 0));
 		lblSal.setBounds(100, 565, 70, 15);
 		frmAlimentacion.getContentPane().add(lblSal);
 
@@ -284,7 +317,7 @@ public class App {
 
 		JLabel lblCalorias = new JLabel("Calorías:");
 		lblCalorias.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCalorias.setForeground(new Color(32, 178, 170));
+		lblCalorias.setForeground(new Color(255, 165, 0));
 		lblCalorias.setBounds(100, 592, 70, 15);
 		frmAlimentacion.getContentPane().add(lblCalorias);
 
@@ -299,130 +332,132 @@ public class App {
 		btnMostrar.doClick();
 
 		JComboBox comboBoxAlimentos = new JComboBox();
-		comboBoxAlimentos.setBounds(809, 323, 106, 21);
+		comboBoxAlimentos.setBounds(715, 319, 106, 21);
 		frmAlimentacion.getContentPane().add(comboBoxAlimentos);
 
 		JLabel lblNewLabel = new JLabel("Alimento:");
-		lblNewLabel.setForeground(new Color(32, 178, 170));
+		lblNewLabel.setForeground(new Color(255, 165, 0));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(729, 327, 70, 13);
+		lblNewLabel.setBounds(635, 323, 70, 13);
 		frmAlimentacion.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Cantidad:");
-		lblNewLabel_1.setForeground(new Color(32, 178, 170));
+		lblNewLabel_1.setForeground(new Color(255, 165, 0));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(952, 327, 73, 13);
+		lblNewLabel_1.setBounds(858, 323, 73, 13);
 		frmAlimentacion.getContentPane().add(lblNewLabel_1);
 
 		textFieldCantidad = new JTextField();
-		textFieldCantidad.setBounds(1034, 324, 70, 19);
+		textFieldCantidad.setBounds(940, 320, 70, 19);
 		frmAlimentacion.getContentPane().add(textFieldCantidad);
 		textFieldCantidad.setColumns(10);
 
 		JButton btnAñadir = new JButton("Añadir");
-		btnAñadir.setBackground(new Color(32, 178, 170));
+		btnAñadir.setBackground(new Color(255, 165, 0));
 		btnAñadir.setForeground(new Color(255, 255, 255));
-		btnAñadir.setBounds(896, 389, 85, 21);
+		btnAñadir.setBounds(802, 385, 85, 21);
 		frmAlimentacion.getContentPane().add(btnAñadir);
 
 		JButton btnTotalDiario = new JButton("Total Diario");
-		btnTotalDiario.setBackground(new Color(32, 178, 170));
+		btnTotalDiario.setBackground(new Color(255, 165, 0));
 		btnTotalDiario.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnTotalDiario.setForeground(new Color(255, 255, 255));
-		btnTotalDiario.setBounds(881, 426, 123, 21);
+		btnTotalDiario.setBounds(787, 422, 123, 21);
 		frmAlimentacion.getContentPane().add(btnTotalDiario);
 
 		JLabel lblGrasas_1 = new JLabel("Grasas:");
-		lblGrasas_1.setForeground(new Color(32, 178, 170));
+		lblGrasas_1.setForeground(new Color(255, 165, 0));
 		lblGrasas_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblGrasas_1.setBounds(995, 483, 99, 13);
+		lblGrasas_1.setBounds(901, 479, 99, 13);
 		frmAlimentacion.getContentPane().add(lblGrasas_1);
 
 		JLabel lblGrasasSaturadas_1 = new JLabel("Grasas Saturadas:");
-		lblGrasasSaturadas_1.setForeground(new Color(32, 178, 170));
+		lblGrasasSaturadas_1.setForeground(new Color(255, 165, 0));
 		lblGrasasSaturadas_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblGrasasSaturadas_1.setBounds(1187, 483, 141, 13);
+		lblGrasasSaturadas_1.setBounds(1093, 479, 141, 13);
 		frmAlimentacion.getContentPane().add(lblGrasasSaturadas_1);
 
 		JLabel lblHidratos_1 = new JLabel("Hidratos:");
-		lblHidratos_1.setForeground(new Color(32, 178, 170));
+		lblHidratos_1.setForeground(new Color(255, 165, 0));
 		lblHidratos_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblHidratos_1.setBounds(992, 530, 73, 13);
+		lblHidratos_1.setBounds(898, 526, 73, 13);
 		frmAlimentacion.getContentPane().add(lblHidratos_1);
 
 		JLabel lblAzucares_1 = new JLabel("Azúcares:");
-		lblAzucares_1.setForeground(new Color(32, 178, 170));
+		lblAzucares_1.setForeground(new Color(255, 165, 0));
 		lblAzucares_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblAzucares_1.setBounds(1187, 534, 99, 13);
+		lblAzucares_1.setBounds(1093, 530, 99, 13);
 		frmAlimentacion.getContentPane().add(lblAzucares_1);
 
 		textFieldGrasasTotales = new JTextField();
 		textFieldGrasasTotales.setEditable(false);
 		textFieldGrasasTotales.setColumns(10);
-		textFieldGrasasTotales.setBounds(1075, 481, 60, 19);
+		textFieldGrasasTotales.setBounds(981, 477, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldGrasasTotales);
 
 		textFieldGrasasSatTotal = new JTextField();
 		textFieldGrasasSatTotal.setEditable(false);
 		textFieldGrasasSatTotal.setColumns(10);
-		textFieldGrasasSatTotal.setBounds(1324, 480, 60, 19);
+		textFieldGrasasSatTotal.setBounds(1230, 476, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldGrasasSatTotal);
 
 		textFieldAzucarTotal = new JTextField();
 		textFieldAzucarTotal.setEditable(false);
 		textFieldAzucarTotal.setColumns(10);
-		textFieldAzucarTotal.setBounds(1324, 530, 60, 19);
+		textFieldAzucarTotal.setBounds(1230, 526, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldAzucarTotal);
 
 		textFieldHidratosTotal = new JTextField();
 		textFieldHidratosTotal.setEditable(false);
 		textFieldHidratosTotal.setColumns(10);
-		textFieldHidratosTotal.setBounds(1075, 532, 60, 19);
+		textFieldHidratosTotal.setBounds(981, 528, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldHidratosTotal);
 
 		JLabel lblProtenias_1 = new JLabel("Proteínas:");
 		lblProtenias_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblProtenias_1.setForeground(new Color(32, 178, 170));
-		lblProtenias_1.setBounds(995, 577, 85, 15);
+		lblProtenias_1.setForeground(new Color(255, 165, 0));
+		lblProtenias_1.setBounds(901, 573, 85, 15);
 		frmAlimentacion.getContentPane().add(lblProtenias_1);
 
 		textFieldProteinasTotal = new JTextField();
 		textFieldProteinasTotal.setEditable(false);
 		textFieldProteinasTotal.setColumns(10);
-		textFieldProteinasTotal.setBounds(1075, 576, 60, 19);
+		textFieldProteinasTotal.setBounds(981, 572, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldProteinasTotal);
 
 		JLabel lblSal_1 = new JLabel("Sal:");
 		lblSal_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSal_1.setForeground(new Color(32, 178, 170));
-		lblSal_1.setBounds(1187, 578, 70, 15);
+		lblSal_1.setForeground(new Color(255, 165, 0));
+		lblSal_1.setBounds(1093, 574, 70, 15);
 		frmAlimentacion.getContentPane().add(lblSal_1);
 
 		textFieldSalTotal = new JTextField();
 		textFieldSalTotal.setEditable(false);
 		textFieldSalTotal.setColumns(10);
-		textFieldSalTotal.setBounds(1324, 566, 60, 17);
+		textFieldSalTotal.setBounds(1230, 562, 60, 17);
 		frmAlimentacion.getContentPane().add(textFieldSalTotal);
 
 		JLabel lblCalorias_1 = new JLabel("Calorías:");
 		lblCalorias_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCalorias_1.setForeground(new Color(32, 178, 170));
-		lblCalorias_1.setBounds(1090, 639, 70, 15);
+		lblCalorias_1.setForeground(new Color(255, 165, 0));
+		lblCalorias_1.setBounds(996, 635, 70, 15);
 		frmAlimentacion.getContentPane().add(lblCalorias_1);
 
 		textFieldCaloriastotal = new JTextField();
 		textFieldCaloriastotal.setEditable(false);
 		textFieldCaloriastotal.setColumns(10);
-		textFieldCaloriastotal.setBounds(1187, 638, 60, 19);
+		textFieldCaloriastotal.setBounds(1093, 634, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldCaloriastotal);
 		
 		JLabel lblCalcularCaloriasDiarias = new JLabel("Calcular calorias diarias");
-		lblCalcularCaloriasDiarias.setForeground(new Color(32, 178, 170));
-		lblCalcularCaloriasDiarias.setBounds(103, 673, 185, 15);
+		lblCalcularCaloriasDiarias.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCalcularCaloriasDiarias.setForeground(new Color(255, 165, 0));
+		lblCalcularCaloriasDiarias.setBounds(100, 675, 185, 15);
 		frmAlimentacion.getContentPane().add(lblCalcularCaloriasDiarias);
 		
 		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setForeground(new Color(32, 178, 170));
+		lblPeso.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblPeso.setForeground(new Color(255, 165, 0));
 		lblPeso.setBounds(100, 700, 70, 20);
 		frmAlimentacion.getContentPane().add(lblPeso);
 		
@@ -437,18 +472,19 @@ public class App {
 		frmAlimentacion.getContentPane().add(comboBoxFA);
 		
 		JLabel lblFa = new JLabel("FA:");
-		lblFa.setForeground(new Color(32, 178, 170));
+		lblFa.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblFa.setForeground(new Color(255, 165, 0));
 		lblFa.setBounds(100, 737, 70, 15);
 		frmAlimentacion.getContentPane().add(lblFa);
 		
 		JButton btnCalcular = new JButton("Calcular");
-		btnCalcular.setBackground(new Color(32, 178, 170));
+		btnCalcular.setBackground(new Color(255, 165, 0));
 		btnCalcular.setForeground(new Color(255, 255, 255));
 		btnCalcular.setBounds(338, 711, 117, 25);
 		frmAlimentacion.getContentPane().add(btnCalcular);
 		
 		JLabel lblTotalCalorias = new JLabel("Total calorias:");
-		lblTotalCalorias.setForeground(new Color(32, 178, 170));
+		lblTotalCalorias.setForeground(new Color(255, 165, 0));
 		lblTotalCalorias.setBackground(new Color(255, 255, 255));
 		lblTotalCalorias.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblTotalCalorias.setBounds(506, 716, 117, 15);
@@ -460,7 +496,8 @@ public class App {
 		textFieldCalTotal.setColumns(10);
 		
 		JLabel lblKcal = new JLabel("Kcal");
-		lblKcal.setForeground(new Color(32, 178, 170));
+		lblKcal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblKcal.setForeground(new Color(255, 165, 0));
 		lblKcal.setBounds(729, 716, 70, 15);
 		frmAlimentacion.getContentPane().add(lblKcal);
 
@@ -664,9 +701,8 @@ public class App {
 							if(alimentosComidos.containsKey(alimento)) {
 								cantidad = alimentosComidos.get(alimento) + cantidad;
 								alimentosComidos.remove(alimento);
-								alimentosComidos.put(alimento, cantidad);
 							}
-							
+							alimentosComidos.put(alimento, cantidad);
 						
 					
 
