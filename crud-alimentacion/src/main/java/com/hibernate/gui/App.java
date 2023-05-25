@@ -32,6 +32,12 @@ import java.util.HashMap;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * Clase App: interfaz gráfica mediante la que se interacciona con
+ *  las clases DAO las cuales interaccionan con la base de datos
+ * @author eva lara velarte y jose ayala farell
+ *
+ */
 public class App {
 
 	private JFrame frmAlimentacion;
