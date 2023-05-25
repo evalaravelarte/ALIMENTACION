@@ -46,7 +46,7 @@ public class App {
 	private JTextField textFieldSal;
 	private JTextField textFieldCalorias;
 	private JTextField textFieldCantidad;
-	
+
 	String erNombre = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
 
 	/**
@@ -66,8 +66,7 @@ public class App {
 			return false;
 		}
 	}
-	
-	
+
 	// Variables para sumar las variables de los alimentos
 	private double grasas = 0;
 	private double grasasSat = 0;
@@ -76,8 +75,7 @@ public class App {
 	private double proteinas = 0;
 	private double sal = 0;
 	private double calorias = 0;
-	
-	
+
 	private JTable tableTotalComido;
 	private JTextField textFieldGrasasTotales;
 	private JTextField textFieldGrasasSatTotal;
@@ -88,22 +86,24 @@ public class App {
 	private JTextField textFieldCaloriastotal;
 	private JTextField textFieldPeso;
 	private JTextField textFieldCalTotal;
-	
-	static final int MAX_SAL=5;
-	static final int MAX_AZUCAR=22;
-	static final int MAX_KCAL=200;
-	static final double EJER_POCO=1.2;
-	static final double EJER_LIGERO=1.4;
-	static final double EJER_MODERADO=1.6;
-	static final double EJER_FUERTE=1.8;
-	static final double EJER_MUY_FUERTE=2;
-	
+
+	static final int MAX_SAL = 5;
+	static final int MAX_AZUCAR = 22;
+	static final int MAX_KCAL = 200;
+	static final double EJER_POCO = 1.2;
+	static final double EJER_LIGERO = 1.4;
+	static final double EJER_MODERADO = 1.6;
+	static final double EJER_FUERTE = 1.8;
+	static final double EJER_MUY_FUERTE = 2;
+
 	/**
-	 * Función calcularCantidad para que partiendo de los datos de un alimento cada 100g, 
-	 * obtenganmos los valores correspondientes a la cantidad.
+	 * Función calcularCantidad para que partiendo de los datos de un alimento cada
+	 * 100g, obtenganmos los valores correspondientes a la cantidad.
+	 * 
 	 * @param variable: dato de un alimento
 	 * @param cantidad: cantidad de alimento que se ha comido
-	 * @return devuelve el valor correspondiente del dato del alimento en función de la cantidad
+	 * @return devuelve el valor correspondiente del dato del alimento en función de
+	 *         la cantidad
 	 */
 	static double calcularCantidad(double variable, double cantidad) {
 
@@ -113,12 +113,13 @@ public class App {
 
 	/**
 	 * Función para calcular las calorias que debe ingerir una persona al día
-	 * @param peso: peso de la persona
+	 * 
+	 * @param peso:    peso de la persona
 	 * @param factAct: factor de actividad, cantidad de ejercicio que realiza
 	 * @return devulve las calorías que debe comer
 	 */
 	static double calcularCalorias(double peso, double factAct) {
-		
+
 		return peso * 22 * factAct;
 	}
 
@@ -205,21 +206,20 @@ public class App {
 		JScrollPane scrollPaneAlimentosComidos = new JScrollPane(tableTotalComido);
 		scrollPaneAlimentosComidos.setBounds(653, 483, 221, 98);
 		frmAlimentacion.getContentPane().add(scrollPaneAlimentosComidos);
-		
-		
-		// Cambiar color del encabezado de la tabla
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        headerRenderer.setBackground(new Color(255,165,0));
-        headerRenderer.setForeground(Color.WHITE);
-        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-        for (int i = 0; i < tableAlimentos.getColumnModel().getColumnCount(); i++) {
-        	tableAlimentos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-        }
-        
-        for (int i = 0; i < tableTotalComido.getColumnModel().getColumnCount(); i++) {
-        	tableTotalComido.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-        }
+		// Cambiar color del encabezado de la tabla
+		DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+		headerRenderer.setBackground(new Color(255, 165, 0));
+		headerRenderer.setForeground(Color.WHITE);
+		headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+		for (int i = 0; i < tableAlimentos.getColumnModel().getColumnCount(); i++) {
+			tableAlimentos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+		}
+
+		for (int i = 0; i < tableTotalComido.getColumnModel().getColumnCount(); i++) {
+			tableTotalComido.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+		}
 
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.setForeground(Color.WHITE);
@@ -471,54 +471,55 @@ public class App {
 		textFieldCaloriastotal.setColumns(10);
 		textFieldCaloriastotal.setBounds(1093, 634, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldCaloriastotal);
-		
+
 		JLabel lblCalcularCaloriasDiarias = new JLabel("Calcular calorias diarias");
 		lblCalcularCaloriasDiarias.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCalcularCaloriasDiarias.setForeground(new Color(255, 165, 0));
 		lblCalcularCaloriasDiarias.setBounds(100, 675, 185, 15);
 		frmAlimentacion.getContentPane().add(lblCalcularCaloriasDiarias);
-		
+
 		JLabel lblPeso = new JLabel("Peso:");
 		lblPeso.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPeso.setForeground(new Color(255, 165, 0));
 		lblPeso.setBounds(100, 700, 70, 20);
 		frmAlimentacion.getContentPane().add(lblPeso);
-		
+
 		textFieldPeso = new JTextField();
 		textFieldPeso.setBounds(161, 701, 60, 19);
 		frmAlimentacion.getContentPane().add(textFieldPeso);
 		textFieldPeso.setColumns(10);
-		
+
 		JComboBox comboBoxFA = new JComboBox();
-		comboBoxFA.setModel(new DefaultComboBoxModel(new String[] {"Poco/Nada", "Ligero", "Moderado", "Fuerte", "Muy Fuerte"}));
+		comboBoxFA.setModel(new DefaultComboBoxModel(
+				new String[] { "Poco/Nada", "Ligero", "Moderado", "Fuerte", "Muy Fuerte" }));
 		comboBoxFA.setBounds(161, 732, 106, 24);
 		frmAlimentacion.getContentPane().add(comboBoxFA);
-		
+
 		JLabel lblFa = new JLabel("FA:");
 		lblFa.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFa.setForeground(new Color(255, 165, 0));
 		lblFa.setBounds(100, 737, 70, 15);
 		frmAlimentacion.getContentPane().add(lblFa);
-		
+
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setBackground(new Color(255, 165, 0));
 		btnCalcular.setForeground(new Color(255, 255, 255));
 		btnCalcular.setBounds(338, 711, 117, 25);
 		frmAlimentacion.getContentPane().add(btnCalcular);
-		
+
 		JLabel lblTotalCalorias = new JLabel("Total calorias:");
 		lblTotalCalorias.setForeground(new Color(255, 165, 0));
 		lblTotalCalorias.setBackground(new Color(255, 255, 255));
 		lblTotalCalorias.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblTotalCalorias.setBounds(506, 716, 117, 15);
 		frmAlimentacion.getContentPane().add(lblTotalCalorias);
-		
+
 		textFieldCalTotal = new JTextField();
 		textFieldCalTotal.setEditable(false);
 		textFieldCalTotal.setBounds(621, 714, 85, 19);
 		frmAlimentacion.getContentPane().add(textFieldCalTotal);
 		textFieldCalTotal.setColumns(10);
-		
+
 		JLabel lblKcal = new JLabel("Kcal");
 		lblKcal.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblKcal.setForeground(new Color(255, 165, 0));
@@ -580,7 +581,7 @@ public class App {
 				textFieldCalorias.setText(modelAlimentos.getValueAt(index, 8).toString());
 				comboBoxAlimentos.setSelectedItem(
 						modelAlimentos.getValueAt(index, 1).toString());
-				
+
 				String combo = modelAlimentos.getValueAt(index, 1).toString();
 				comboBoxAlimentos.setSelectedItem(combo);
 			}
@@ -592,70 +593,83 @@ public class App {
 				try {
 					String mensaje = "";
 					boolean correcto = true;
-					
-					
-					if(!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
+
+					if (!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
 						mensaje += "Nombre no válido\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
 						mensaje += "Grasas no válidas\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
 						mensaje += "Grasas saturadas no válidas\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
 						mensaje += "Hidratos no válidos\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
 						mensaje += "Azucar no válido\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
 						mensaje += "Proteinas no válidas\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldSal.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldSal.getText(), erNombre)) {
 						mensaje += "Sal no válida\n";
 						correcto = false;
 					}
-					if(comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
+					if (comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
 						mensaje += "Calorías no válidas\n";
 						correcto = false;
 					}
-					
-					if(correcto) {
+
+					if (correcto) {
 						String nombre = textFieldNombre.getText();
-						double grasas = Double.parseDouble(textFieldGrasas.getText());
-						double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
-						double hidratos = Double.parseDouble(textFieldHidratos.getText());
-						double azucar = Double.parseDouble(textFieldAzucar.getText());
-						double proteinas = Double.parseDouble(textFieldProteinas.getText());
+						double grasas = Double
+								.parseDouble(textFieldGrasas.getText());
+						double grasasSat = Double.parseDouble(
+								textFieldGrasasSat.getText());
+						double hidratos = Double.parseDouble(
+								textFieldHidratos.getText());
+						double azucar = Double
+								.parseDouble(textFieldAzucar.getText());
+						double proteinas = Double.parseDouble(
+								textFieldProteinas.getText());
 						double sal = Double.parseDouble(textFieldSal.getText());
-						double calorias = Double.parseDouble(textFieldCalorias.getText());
+						double calorias = Double.parseDouble(
+								textFieldCalorias.getText());
+						
+						
+						
+						if ((grasasSat > grasas) && (azucar > hidratos)) {
+							mensaje = "Las grasas saturadas deben ser menores a las grasas y el azúcar debe ser menor a los hidratos";
+						}else if(azucar > hidratos){
+							mensaje = "El azúcar debe ser menor a los hidratos";
+						}else if(grasasSat > grasas){
+							mensaje = "Las grasas saturadas deben ser menores a las grasas";							
+						}else {
+							Alimento a = new Alimento(nombre, grasas, grasasSat, hidratos, azucar,proteinas, sal, calorias);
+							alimentoDAO.insertAlimento(a);
+							textFieldIdAlimento.setText("");
+							textFieldNombre.setText("");
+							textFieldGrasas.setText("");
+							textFieldGrasasSat.setText("");
+							textFieldHidratos.setText("");
+							textFieldAzucar.setText("");
+							textFieldProteinas.setText("");
+							textFieldSal.setText("");
+							textFieldCalorias.setText("");
+							mensaje = "Alimento creado";
+							btnMostrar.doClick();
+						}
 
-						Alimento a = new Alimento(nombre, grasas, grasasSat, hidratos, azucar,
-								proteinas, sal, calorias);
-						alimentoDAO.insertAlimento(a);
-
-						textFieldIdAlimento.setText("");
-						textFieldNombre.setText("");
-						textFieldGrasas.setText("");
-						textFieldGrasasSat.setText("");
-						textFieldHidratos.setText("");
-						textFieldAzucar.setText("");
-						textFieldProteinas.setText("");
-						textFieldSal.setText("");
-						textFieldCalorias.setText("");
-						mensaje = "Alimento creado";
-						btnMostrar.doClick();
 					}
 					JOptionPane.showMessageDialog(null, mensaje);
 
-					
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
 				}
@@ -666,65 +680,95 @@ public class App {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				String mensaje = "";
-				boolean correcto = true;
-				
-				
-				if(!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
-					mensaje += "Nombre no válido\n";
-					correcto = false;
+					String mensaje = "";
+					boolean correcto = true;
+
+					if (!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
+						mensaje += "Nombre no válido\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
+						mensaje += "Grasas no válidas\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
+						mensaje += "Grasas saturadas no válidas\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
+						mensaje += "Hidratos no válidos\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
+						mensaje += "Azucar no válido\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
+						mensaje += "Proteinas no válidas\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldSal.getText(), erNombre)) {
+						mensaje += "Sal no válida\n";
+						correcto = false;
+					}
+					if (comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
+						mensaje += "Calorías no válidas\n";
+						correcto = false;
+					}
+
+					if (correcto) {
+						int id = Integer.parseInt(textFieldIdAlimento.getText());
+						String nombre = textFieldNombre.getText();
+						double grasas = Double
+								.parseDouble(textFieldGrasas.getText());
+						double grasasSat = Double.parseDouble(
+								textFieldGrasasSat.getText());
+						double hidratos = Double.parseDouble(
+								textFieldHidratos.getText());
+						double azucar = Double
+								.parseDouble(textFieldAzucar.getText());
+						double proteinas = Double.parseDouble(
+								textFieldProteinas.getText());
+						double sal = Double.parseDouble(textFieldSal.getText());
+						double calorias = Double.parseDouble(
+								textFieldCalorias.getText());
+
+						Alimento a = alimentoDAO.selectAlimentoById(id);
+						a.setNombre(nombre);
+						a.setGrasas(grasas);
+						a.setGrasasSaturadas(grasasSat);
+						a.setHidratos(hidratos);
+						a.setAzucar(azucar);
+						a.setProteinas(proteinas);
+						a.setSal(sal);
+						a.setCalorias(calorias);
+
+						alimentoDAO.updateAlimento(a);
+						textFieldIdAlimento.setText("");
+						textFieldNombre.setText("");
+						textFieldGrasas.setText("");
+						textFieldGrasasSat.setText("");
+						textFieldHidratos.setText("");
+						textFieldAzucar.setText("");
+						textFieldProteinas.setText("");
+						textFieldSal.setText("");
+						textFieldCalorias.setText("");
+						mensaje = "Alimento actualizado";
+						btnMostrar.doClick();
+					}
+					JOptionPane.showMessageDialog(null, mensaje);
+
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
 				}
-				if(comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
-					mensaje += "Grasas no válidas\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
-					mensaje += "Grasas saturadas no válidas\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
-					mensaje += "Hidratos no válidos\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
-					mensaje += "Azucar no válido\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
-					mensaje += "Proteinas no válidas\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldSal.getText(), erNombre)) {
-					mensaje += "Sal no válida\n";
-					correcto = false;
-				}
-				if(comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
-					mensaje += "Calorías no válidas\n";
-					correcto = false;
-				}
-				
-				if(correcto) {
+			}
+		});
+
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
 					int id = Integer.parseInt(textFieldIdAlimento.getText());
-					String nombre = textFieldNombre.getText();
-					double grasas = Double.parseDouble(textFieldGrasas.getText());
-					double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
-					double hidratos = Double.parseDouble(textFieldHidratos.getText());
-					double azucar = Double.parseDouble(textFieldAzucar.getText());
-					double proteinas = Double.parseDouble(textFieldProteinas.getText());
-					double sal = Double.parseDouble(textFieldSal.getText());
-					double calorias = Double.parseDouble(textFieldCalorias.getText());
-
-					Alimento a = alimentoDAO.selectAlimentoById(id);
-					a.setNombre(nombre);
-					a.setGrasas(grasas);
-					a.setGrasasSaturadas(grasasSat);
-					a.setHidratos(hidratos);
-					a.setAzucar(azucar);
-					a.setProteinas(proteinas);
-					a.setSal(sal);
-					a.setCalorias(calorias);
-
-					alimentoDAO.updateAlimento(a);
+					alimentoDAO.deleteAlimento(id);
 					textFieldIdAlimento.setText("");
 					textFieldNombre.setText("");
 					textFieldGrasas.setText("");
@@ -734,33 +778,8 @@ public class App {
 					textFieldProteinas.setText("");
 					textFieldSal.setText("");
 					textFieldCalorias.setText("");
-					mensaje = "Alimento actualizado";
 					btnMostrar.doClick();
-				}
-				JOptionPane.showMessageDialog(null, mensaje);
-				
-			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
-			}
-			}
-		});
-
-		btnBorrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-				int id = Integer.parseInt(textFieldIdAlimento.getText());
-				alimentoDAO.deleteAlimento(id);
-				textFieldIdAlimento.setText("");
-				textFieldNombre.setText("");
-				textFieldGrasas.setText("");
-				textFieldGrasasSat.setText("");
-				textFieldHidratos.setText("");
-				textFieldAzucar.setText("");
-				textFieldProteinas.setText("");
-				textFieldSal.setText("");
-				textFieldCalorias.setText("");
-				btnMostrar.doClick();
-				}catch(Exception ex) {
+				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Debes escoger un alimento");
 				}
 			}
@@ -801,49 +820,75 @@ public class App {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-				if(!textFieldCalTotal.getText().isEmpty()) {
-					
-					if (!textFieldCantidad.getText().isEmpty()) {
-					
-						String alimento = comboBoxAlimentos.getSelectedItem().toString();
-						double cantidad = Double.parseDouble(textFieldCantidad.getText());
-						Alimento a = alimentoDAO.selectAlimentoByNombre(alimento);
-						Double caloriasMax = Double.parseDouble(textFieldCalTotal.getText());
-					
-						if((calorias < caloriasMax)   &&  ( (calorias += calcularCantidad(a.getCalorias(), cantidad)) <= caloriasMax)) {
-							grasas += calcularCantidad(a.getGrasas(), cantidad);
-							grasasSat += calcularCantidad(a.getGrasasSaturadas(), cantidad);
-							hidratos += calcularCantidad(a.getHidratos(), cantidad);
-							azucar += calcularCantidad(a.getAzucar(), cantidad);
-							proteinas += calcularCantidad(a.getProteinas(), cantidad);
-							sal += calcularCantidad(a.getSal(), cantidad);
-							calorias += calcularCantidad(a.getCalorias(), cantidad);
-					
-							if(alimentosComidos.containsKey(alimento)) {
-								cantidad = alimentosComidos.get(alimento) + cantidad;
-								alimentosComidos.remove(alimento);
-							}
-							alimentosComidos.put(alimento, cantidad);
-						
-					
+					if (!textFieldCalTotal.getText().isEmpty()) {
 
-						comboBoxAlimentos.setSelectedIndex(-1);
-						textFieldCantidad.setText("");
-						}else {
-							JOptionPane.showMessageDialog(null, "Superas las calorías máximas, no puedes añadirlo");
-							textFieldCantidad.setText("");
+						if (!textFieldCantidad.getText().isEmpty()) {
+
+							String alimento = comboBoxAlimentos
+									.getSelectedItem().toString();
+							double cantidad = Double.parseDouble(
+									textFieldCantidad.getText());
+							Alimento a = alimentoDAO.selectAlimentoByNombre(
+									alimento);
+							Double caloriasMax = Double.parseDouble(
+									textFieldCalTotal.getText());
+
+							if ((calorias < caloriasMax)
+									&& ((calorias += calcularCantidad(
+											a.getCalorias(),
+											cantidad)) <= caloriasMax)) {
+								grasas += calcularCantidad(
+										a.getGrasas(),
+										cantidad);
+								grasasSat += calcularCantidad(a
+										.getGrasasSaturadas(),
+										cantidad);
+								hidratos += calcularCantidad(
+										a.getHidratos(),
+										cantidad);
+								azucar += calcularCantidad(
+										a.getAzucar(),
+										cantidad);
+								proteinas += calcularCantidad(
+										a.getProteinas(),
+										cantidad);
+								sal += calcularCantidad(a.getSal(),
+										cantidad);
+								calorias += calcularCantidad(
+										a.getCalorias(),
+										cantidad);
+
+								if (alimentosComidos.containsKey(
+										alimento)) {
+									cantidad = alimentosComidos
+											.get(alimento)
+											+ cantidad;
+									alimentosComidos.remove(
+											alimento);
+								}
+								alimentosComidos.put(alimento,
+										cantidad);
+
+								comboBoxAlimentos.setSelectedIndex(-1);
+								textFieldCantidad.setText("");
+							} else {
+								JOptionPane.showMessageDialog(null,
+										"Superas las calorías máximas, no puedes añadirlo");
+								textFieldCantidad.setText("");
+							}
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Introduce la cantidad de alimento");
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Deber calcular tus calorias máximas previamente");
 					}
-					}else {
-					JOptionPane.showMessageDialog(null, "Introduce la cantidad de alimento");
-					}
-					
-				}else {
-					JOptionPane.showMessageDialog(null, "Deber calcular tus calorias máximas previamente");
-				}
-				
-				}catch(NullPointerException ex) {
+
+				} catch (NullPointerException ex) {
 					JOptionPane.showMessageDialog(null, "Selecciona un alimento");
-				}catch(IllegalArgumentException ex2) {
+				} catch (IllegalArgumentException ex2) {
 					JOptionPane.showMessageDialog(null, "Formato de cantidad no válido");
 				}
 
@@ -888,37 +933,35 @@ public class App {
 			}
 		});
 
-		
-		
 		btnCalcular.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				double peso = Double.parseDouble(textFieldPeso.getText());
-				double calorias=0;
-				
-				switch(comboBoxFA.getSelectedIndex()) {
-				
+				double calorias = 0;
+
+				switch (comboBoxFA.getSelectedIndex()) {
+
 				case 0:
-					calorias=calcularCalorias(peso, EJER_POCO);
+					calorias = calcularCalorias(peso, EJER_POCO);
 					break;
 				case 1:
-					calorias=calcularCalorias(peso, EJER_LIGERO);
+					calorias = calcularCalorias(peso, EJER_LIGERO);
 					break;
 				case 2:
-					calorias=calcularCalorias(peso, EJER_MODERADO);
+					calorias = calcularCalorias(peso, EJER_MODERADO);
 					break;
 				case 3:
-					calorias=calcularCantidad(peso, EJER_FUERTE);
+					calorias = calcularCantidad(peso, EJER_FUERTE);
 					break;
 				case 4:
-					calorias=calcularCalorias(peso, EJER_MUY_FUERTE);					
-				
+					calorias = calcularCalorias(peso, EJER_MUY_FUERTE);
+
 				}
-				
+
 				String cal = String.format("%.2f", calorias);
 				textFieldCalTotal.setText(cal.replace(",", "."));
-				
+
 			}
 		});
 	}
