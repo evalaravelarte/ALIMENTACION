@@ -527,6 +527,10 @@ public class App {
 		frmAlimentacion.getContentPane().add(lblKcal);
 
 
+		/**
+		 * Evento al pulsar el botón mostrar, hace una conexion con la base 
+		 * de datos para rellenar la tabla de alimentos
+		 */
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -554,6 +558,10 @@ public class App {
 		
 		btnMostrar.doClick();
 
+		/**
+		 * Evento al clicar sobre la tabla de alimentos, dependiendo la
+		 * fila que se seleccione se rellenarán los textFields con unos valores
+		 */
 		tableAlimentos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -582,6 +590,10 @@ public class App {
 			}
 		});
 
+		/**
+		 * Evento al pulsar el botón crear alimento, crea un alimento y lo inserta en la base
+		 * de datos. Hace el control de errores necesario.
+		 */
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -666,6 +678,10 @@ public class App {
 			}
 		});
 
+		/**
+		 * Evento al pulsar el botón actualizar alimento, seleccionando un alimento de la tabla
+		 * y si  
+		 */
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
