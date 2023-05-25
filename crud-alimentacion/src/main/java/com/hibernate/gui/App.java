@@ -385,7 +385,7 @@ public class App {
 		btnTotalDiario.setBackground(new Color(255, 165, 0));
 		btnTotalDiario.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnTotalDiario.setForeground(new Color(255, 255, 255));
-		btnTotalDiario.setBounds(787, 422, 123, 21);
+		btnTotalDiario.setBounds(783, 422, 123, 21);
 		frmAlimentacion.getContentPane().add(btnTotalDiario);
 
 		JLabel lblGrasas_1 = new JLabel("Grasas:");
@@ -525,6 +525,12 @@ public class App {
 		lblKcal.setForeground(new Color(255, 165, 0));
 		lblKcal.setBounds(729, 716, 70, 15);
 		frmAlimentacion.getContentPane().add(lblKcal);
+		
+		JLabel lblG = new JLabel("g");
+		lblG.setForeground(new Color(255, 165, 0));
+		lblG.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblG.setBounds(1021, 324, 45, 13);
+		frmAlimentacion.getContentPane().add(lblG);
 
 
 		/**
@@ -686,77 +692,83 @@ public class App {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String mensaje = "";
-					boolean correcto = true;
+					
+					if(!textFieldIdAlimento.getText().isEmpty()) {
+						String mensaje = "";
+						boolean correcto = true;
 
-					if (!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
-						mensaje += "Nombre no válido\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
-						mensaje += "Grasas no válidas\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
-						mensaje += "Grasas saturadas no válidas\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
-						mensaje += "Hidratos no válidos\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
-						mensaje += "Azucar no válido\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
-						mensaje += "Proteinas no válidas\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldSal.getText(), erNombre)) {
-						mensaje += "Sal no válida\n";
-						correcto = false;
-					}
-					if (comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
-						mensaje += "Calorías no válidas\n";
-						correcto = false;
-					}
+						if (!comprobarExpReg(textFieldNombre.getText(), erNombre)) {
+							mensaje += "Nombre no válido\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldGrasas.getText(), erNombre)) {
+							mensaje += "Grasas no válidas\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldGrasasSat.getText(), erNombre)) {
+							mensaje += "Grasas saturadas no válidas\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldHidratos.getText(), erNombre)) {
+							mensaje += "Hidratos no válidos\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldAzucar.getText(), erNombre)) {
+							mensaje += "Azucar no válido\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldProteinas.getText(), erNombre)) {
+							mensaje += "Proteinas no válidas\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldSal.getText(), erNombre)) {
+							mensaje += "Sal no válida\n";
+							correcto = false;
+						}
+						if (comprobarExpReg(textFieldCalorias.getText(), erNombre)) {
+							mensaje += "Calorías no válidas\n";
+							correcto = false;
+						}
 
-					if (correcto) {
-						int id = Integer.parseInt(textFieldIdAlimento.getText());
-						String nombre = textFieldNombre.getText();
-						double grasas = Double.parseDouble(textFieldGrasas.getText());
-						double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
-						double hidratos = Double.parseDouble(textFieldHidratos.getText());
-						double azucar = Double.parseDouble(textFieldAzucar.getText());
-						double proteinas = Double.parseDouble(textFieldProteinas.getText());
-						double sal = Double.parseDouble(textFieldSal.getText());
-						double calorias = Double.parseDouble(textFieldCalorias.getText());
+						if (correcto) {
+							int id = Integer.parseInt(textFieldIdAlimento.getText());
+							String nombre = textFieldNombre.getText();
+							double grasas = Double.parseDouble(textFieldGrasas.getText());
+							double grasasSat = Double.parseDouble(textFieldGrasasSat.getText());
+							double hidratos = Double.parseDouble(textFieldHidratos.getText());
+							double azucar = Double.parseDouble(textFieldAzucar.getText());
+							double proteinas = Double.parseDouble(textFieldProteinas.getText());
+							double sal = Double.parseDouble(textFieldSal.getText());
+							double calorias = Double.parseDouble(textFieldCalorias.getText());
 
-						Alimento a = alimentoDAO.selectAlimentoById(id);
-						a.setNombre(nombre);
-						a.setGrasas(grasas);
-						a.setGrasasSaturadas(grasasSat);
-						a.setHidratos(hidratos);
-						a.setAzucar(azucar);
-						a.setProteinas(proteinas);
-						a.setSal(sal);
-						a.setCalorias(calorias);
+							Alimento a = alimentoDAO.selectAlimentoById(id);
+							a.setNombre(nombre);
+							a.setGrasas(grasas);
+							a.setGrasasSaturadas(grasasSat);
+							a.setHidratos(hidratos);
+							a.setAzucar(azucar);
+							a.setProteinas(proteinas);
+							a.setSal(sal);
+							a.setCalorias(calorias);
 
-						alimentoDAO.updateAlimento(a);
-						textFieldIdAlimento.setText("");
-						textFieldNombre.setText("");
-						textFieldGrasas.setText("");
-						textFieldGrasasSat.setText("");
-						textFieldHidratos.setText("");
-						textFieldAzucar.setText("");
-						textFieldProteinas.setText("");
-						textFieldSal.setText("");
-						textFieldCalorias.setText("");
-						mensaje = "Alimento actualizado";
-						btnMostrar.doClick();
+							alimentoDAO.updateAlimento(a);
+							textFieldIdAlimento.setText("");
+							textFieldNombre.setText("");
+							textFieldGrasas.setText("");
+							textFieldGrasasSat.setText("");
+							textFieldHidratos.setText("");
+							textFieldAzucar.setText("");
+							textFieldProteinas.setText("");
+							textFieldSal.setText("");
+							textFieldCalorias.setText("");
+							mensaje = "Alimento actualizado";
+							btnMostrar.doClick();
+						}
+						JOptionPane.showMessageDialog(null, mensaje);
+					}else {
+						JOptionPane.showMessageDialog(null, "Selecciona un alimento");
 					}
-					JOptionPane.showMessageDialog(null, mensaje);
+					
 
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Formato de datos incorrecto");
@@ -864,6 +876,8 @@ public class App {
 									alimentosComidos.remove(alimento);
 								}
 								alimentosComidos.put(alimento,cantidad);
+								
+								JOptionPane.showMessageDialog(null,"Alimento añadido");
 
 								comboBoxAlimentos.setSelectedIndex(-1);
 								textFieldCantidad.setText("");
