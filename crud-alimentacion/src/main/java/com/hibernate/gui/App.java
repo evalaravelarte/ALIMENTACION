@@ -679,8 +679,9 @@ public class App {
 		});
 
 		/**
-		 * Evento al pulsar el botón actualizar alimento, seleccionando un alimento de la tabla
-		 * y si  
+		 * Evento al pulsar el botón actualizar alimento, se debe seleccinar un alimento
+		 * de la tabla cambiar los valores deseados. Una vez hecho eso se actualizará
+		 * la tabla.
 		 */
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -763,6 +764,11 @@ public class App {
 			}
 		});
 
+		/**
+		 * Evento al pulsar el botón borrar alimento, se debe seleccionar
+		 * el alimento que se desea eliminar y lo elimina de la base de datos
+		 * y de la tabla.
+		 */
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -785,6 +791,10 @@ public class App {
 			}
 		});
 
+		/**
+		 * Evento al pulsar el botón limpiar, lo que hace es vaciar todos los textFields
+		 * de la creación de alimentos.
+		 */
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -800,6 +810,11 @@ public class App {
 			}
 		});
 
+		/**
+		 * Evento al pulsar el comboBox de alimentos, hace una consulta en la 
+		 * base de datos y coge el nombre de todos los alimentos para 
+		 * insertarlos en el comboBox.
+		 */
 		comboBoxAlimentos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -816,6 +831,12 @@ public class App {
 			}
 		});
 
+		/**
+		 * Al pulsar el botón añadir se activa el evento lo que hace es
+		 * coger el nombre del alimento que está en el comboBox y la cantidad
+		 * que se ha ingerido de dicho alimento y almacenarlos para, posteriormente,
+		 * realizar las operaciones necesarias.
+		 */
 		btnAñadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -867,6 +888,10 @@ public class App {
 			}
 		});
 
+		/**
+		 * Al pulsar el botón total diario se hacen una serie de comprobaciones
+		 * para saber si se ha pasado en algún macronutriente.
+		 */
 		btnTotalDiario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -905,6 +930,10 @@ public class App {
 			}
 		});
 
+		/**
+		 * Al pulsar el botón calcular de calculan las calorías que debes ingerir
+		 * para mantener el peso que tienes, teniendo en cuenta tu  factor de actividad.
+		 */
 		btnCalcular.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
