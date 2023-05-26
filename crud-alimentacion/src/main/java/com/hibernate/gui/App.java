@@ -357,6 +357,7 @@ public class App {
 		textFieldCalorias.setColumns(10);
 
 		JButton btnMostrar = new JButton("Mostrar");
+		btnMostrar.setVisible(false);
 		btnMostrar.setBounds(921, -2, 117, 25);
 		frmAlimentacion.getContentPane().add(btnMostrar);
 
